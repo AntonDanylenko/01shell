@@ -12,7 +12,17 @@ int main(int argc, char *argv[]) {
     execvp(argv[1],args);
   }
   else {
-    printf("Need more arguments.\n" );
+    char *s = malloc(100);
+    printf("Enter command:\n");
+    fgets(s,100,stdin);
+    char ** args = parse_args(s);
+    int x=0;
+    while(args[x]){
+      printf("Arg %d: %s\n", x, args[x]);
+      x++;
+    }
+    printf("Null arg: %s\n", args[x]);
+    execvp(args[0], args);
   }
   return 0;
 }
