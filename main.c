@@ -14,11 +14,22 @@ int main(int argc, char *argv[]) {
   }
   else {*/
   char *s = malloc(100);
-  printf("Enter command:\n");
+  char *directory = malloc(100);
+  getcwd(directory, 100);
+  printf("%s: ", directory);
   fgets(s,100,stdin);
   char *** args = parse_args(s);
-  int i=0;
+  /*int i=0;
   while(args[i]){
+    int ii=0;
+    while(args[i][ii]){
+      printf("args[%d][%d]: %s\n", i, ii, args[i][ii]);
+      ii++;
+    }
+    i++;
+  }*/
+  /*int i=0;
+  while(args){
     int child = fork();
     if(!child){
       int status;
@@ -34,6 +45,6 @@ int main(int argc, char *argv[]) {
       execvp(args[i][0], args[i]);
       i++;
     }
-  }
+  }*/
   return 0;
 }
