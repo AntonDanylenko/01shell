@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 #include "funcs.h"
 
 int main(int argc, char *argv[]) {
@@ -25,12 +26,12 @@ int main(int argc, char *argv[]) {
     }
     else{
       int ii=0;
-      while(args[ii]){
-        printf("Arg %d: %s\n", ii, args[ii]);
+      while(args[i][ii]){
+        printf("Arg %d: %s\n", ii, args[i][ii]);
         ii++;
       }
-      printf("Null arg: %s\n", args[ii]);
-      execvp(args[0], args);
+      printf("Null arg: %s\n", args[i][ii]);
+      execvp(args[i][0], args[i]);
       i++;
     }
   }
