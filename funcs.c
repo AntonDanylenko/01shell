@@ -20,11 +20,17 @@ char *** parse_args(char * line){
   int ii = 0;
   while(i-ii){
     int iii = 0;
+    if (arr[ii]){
+      printf("works\n");
+    }
     while (arr[ii]){
       printf("ii: %d\n", ii);
       printf("iii: %d\n", iii);
-      commands[ii][iii] = strsep(&arr[ii], " ");
+      printf("arr[0]: %s\n", arr[0]);
+      commands[ii][iii] = 0;
+      strsep(&arr[ii], " ");
       printf("iii 2: %d\n", iii);
+      printf("arr[0]: %s\n", arr[0]);
       iii++;
     }
     printf("ii: %d\n", ii);
