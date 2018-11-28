@@ -8,12 +8,12 @@ char ** parse_cmds(char * line){
   int i = 0;
   while(line){
     arr[i] = strsep(&line, ";");
-    printf("arr[%d]: %s\n", i, arr[i]);
+    //printf("arr[%d]: %s\n", i, arr[i]);
     i++;
   }
   strcpy(arr[i-1], strsep(&arr[i-1], "\n"));
-  printf("arr[%d]: %s\n", i-1, arr[i-1]);
-  printf("end i: %d\n", i);
+  //printf("arr[%d]: %s\n", i-1, arr[i-1]);
+  //printf("end i: %d\n", i);
   /*int ii = 0;
   while(i-ii){
     int iii = 0;
@@ -30,5 +30,16 @@ char ** parse_cmds(char * line){
     printf("ii: %d\n", ii);
     ii++;
   }*/
+  return arr;
+}
+
+char ** parse_args(char *cmd){
+  char ** arr = malloc(10 * sizeof(char *));
+  int i = 0;
+  while(cmd){
+    arr[i] = strsep(&cmd, " ");
+    printf("arr[%d]: %s\n", i, arr[i]);
+    i++;
+  }
   return arr;
 }

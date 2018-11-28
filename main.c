@@ -15,6 +15,15 @@ int main(int argc, char *argv[]) {
   int i=0;
   while(commands[i]){
     printf("commands[%d]: %s\n", i, commands[i]);
+    char ** args = parse_args(commands[i]);
+    int child = fork();
+    printf("child: %d\n", child);
+    if(!child){
+      printf("!child");
+    }
+    else{
+      printf("else");
+    }
     i++;
   }
   /*int i=0;
