@@ -18,11 +18,12 @@ int main(int argc, char *argv[]) {
     char ** args = parse_args(commands[i]);
     int child = fork();
     printf("child: %d\n", child);
-    if(!child){
-      printf("!child\n");
+    if(child){
+      printf("parent process\n");
+      wait(NULL);
     }
     else{
-      printf("else\n");
+      printf("child process\n");
     }
     i++;
   }
