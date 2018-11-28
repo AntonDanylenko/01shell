@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     }
     else{
       printf("child process\n");
+      exit(0);
     }
     i++;
   }
