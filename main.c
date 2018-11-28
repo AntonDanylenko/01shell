@@ -6,13 +6,6 @@
 #include "funcs.h"
 
 int main(int argc, char *argv[]) {
-  /*if (argc > 1) {
-    printf("argv[1]: %s\n", argv[1]);
-    char *** args = parse_args(argv[2]);
-    printf("args[0][0]: %s\n", args[0][0]);
-    execvp(argv[1],args);
-  }
-  else {*/
   char *s = malloc(100);
   char *directory = malloc(100);
   getcwd(directory, 100);
@@ -20,8 +13,8 @@ int main(int argc, char *argv[]) {
   fgets(s,100,stdin);
   char ** commands = parse_cmds(s);
   int i=0;
-  while(args[i]){
-    printf("args[%d]: %s\n", i, args[i]);
+  while(commands[i]){
+    printf("commands[%d]: %s\n", i, commands[i]);
     i++;
   }
   /*int i=0;
