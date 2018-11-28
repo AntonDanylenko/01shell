@@ -18,16 +18,12 @@ int main(int argc, char *argv[]) {
   getcwd(directory, 100);
   printf("%s: ", directory);
   fgets(s,100,stdin);
-  char *** args = parse_args(s);
-  /*int i=0;
+  char ** commands = parse_cmds(s);
+  int i=0;
   while(args[i]){
-    int ii=0;
-    while(args[i][ii]){
-      printf("args[%d][%d]: %s\n", i, ii, args[i][ii]);
-      ii++;
-    }
+    printf("args[%d]: %s\n", i, args[i]);
     i++;
-  }*/
+  }
   /*int i=0;
   while(args){
     int child = fork();
