@@ -19,10 +19,10 @@ int main(int argc, char *argv[]) {
     int child = fork();
     printf("child: %d\n", child);
     if(!child){
-      printf("!child");
+      printf("!child\n");
     }
     else{
-      printf("else");
+      printf("else\n");
     }
     i++;
   }
