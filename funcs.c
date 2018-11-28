@@ -39,7 +39,9 @@ char ** parse_args(char *cmd){
   while(cmd){
     arr[i] = strsep(&cmd, " ");
     printf("arr[%d]: %s\n", i, arr[i]);
-    i++;
+    if(strcmp(arr[i]," ")){
+      i++;
+    }
   }
   return arr;
 }
