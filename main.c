@@ -19,12 +19,12 @@ int main(int argc, char *argv[]) {
     int child = fork();
     printf("child: %d\n", child);
     if(!child){
-      printf("child process\n");
+      //printf("child process\n");
       execvp(args[0], args);
       exit(0);
     }
     else{
-      printf("parent process\n");
+      //printf("parent process\n");
       wait(NULL);
     }
     i++;
