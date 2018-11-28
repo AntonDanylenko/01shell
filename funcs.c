@@ -11,9 +11,7 @@ char ** parse_cmds(char * line){
     printf("arr[%d]: %s\n", i, arr[i]);
     i++;
   }
-  if(i){
-    strcpy(arr[i-1], strsep(&arr[i-1], "\n"));
-  }
+  strcpy(arr[i-1], strsep(&arr[i-1], "\n"));
   printf("arr[%d]: %s\n", i-1, arr[i-1]);
   printf("end i: %d\n", i);
   /*int ii = 0;
