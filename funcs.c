@@ -5,7 +5,7 @@
 
 char *** parse_args(char * line){
   char ** arr = malloc(10 * sizeof(char *));
-  char *** commands = malloc(100 * sizeof(char *));
+  char * commands[][] = malloc(10 * sizeof(char *));
   int i = 0;
   while(line){
     arr[i] = strsep(&line, ";");
