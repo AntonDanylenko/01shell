@@ -5,7 +5,7 @@
 
 char *** parse_args(char * line){
   char ** arr = malloc(10 * sizeof(char *));
-  char *** commands = malloc(10 * sizeof(char *));
+  char *** commands = malloc(100 * sizeof(char *));
   int i = 0;
   while(line){
     arr[i] = strsep(&line, ";");
@@ -20,9 +20,6 @@ char *** parse_args(char * line){
   int ii = 0;
   while(i-ii){
     int iii = 0;
-    if (arr[ii]){
-      printf("works\n");
-    }
     while (arr[ii]){
       printf("ii: %d\n", ii);
       printf("iii: %d\n", iii);
