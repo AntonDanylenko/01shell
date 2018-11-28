@@ -18,13 +18,14 @@ int main(int argc, char *argv[]) {
     char ** args = parse_args(commands[i]);
     int child = fork();
     printf("child: %d\n", child);
-    if(child){
-      printf("parent process\n");
-      wait(NULL);
+    if(!child){
+      printf("child process\n");
+      execvp(args[0], args);
+      exit(0);
     }
     else{
-      printf("child process\n");
-      exit(0);
+      printf("parent process\n");
+      wait(NULL);
     }
     i++;
   }
