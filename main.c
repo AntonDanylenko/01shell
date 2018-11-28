@@ -14,10 +14,10 @@ int main(int argc, char *argv[]) {
   char ** commands = parse_cmds(s);
   int i=0;
   while(commands[i]){
-    printf("commands[%d]: %s\n", i, commands[i]);
+    //printf("commands[%d]: %s\n", i, commands[i]);
     char ** args = parse_args(commands[i]);
     int child = fork();
-    printf("child: %d\n", child);
+    //printf("child: %d\n", child);
     if(!child){
       //printf("child process\n");
       execvp(args[0], args);
