@@ -16,17 +16,18 @@ int main(int argc, char *argv[]) {
   while(commands[i]){
     //printf("commands[%d]: %s\n", i, commands[i]);
     char ** args = parse_args(commands[i]);
-    int child = fork();
+    execute(args);
+    /*int child = fork();
     //printf("child: %d\n", child);
     if(!child){
       //printf("child process\n");
-      execvp(args[0], args);
+      execute(args);
       exit(0);
     }
     else{
       //printf("parent process\n");
       wait(NULL);
-    }
+    }*/
     i++;
   }
   /*int i=0;

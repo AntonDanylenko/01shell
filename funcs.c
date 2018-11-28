@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include "funcs.h"
 
@@ -13,23 +14,6 @@ char ** parse_cmds(char * line){
   }
   strcpy(arr[i-1], strsep(&arr[i-1], "\n"));
   //printf("arr[%d]: %s\n", i-1, arr[i-1]);
-  //printf("end i: %d\n", i);
-  /*int ii = 0;
-  while(i-ii){
-    int iii = 0;
-    while (arr[ii]){
-      printf("ii: %d\n", ii);
-      printf("iii: %d\n", iii);
-      printf("arr[0]: %s\n", arr[0]);
-      commands[ii][iii] = 0;
-      strsep(&arr[ii], " ");
-      printf("iii 2: %d\n", iii);
-      printf("arr[0]: %s\n", arr[0]);
-      iii++;
-    }
-    printf("ii: %d\n", ii);
-    ii++;
-  }*/
   return arr;
 }
 
@@ -37,11 +21,29 @@ char ** parse_args(char *cmd){
   char ** arr = malloc(10 * sizeof(char *));
   int i = 0;
   while(cmd){
-    arr[i] = strsep(&cmd, " ");
-    //printf("arr[%d]: %s\n", i, arr[i]);
-    if(strcmp(arr[i],"")){
+    char *temp = strsep(&cmd, " ");
+    if(strcmp(temp,"") ){
+      arr[i] = temp;
+      //printf("arr[%d]: %s\n", i, arr[i]);
       i++;
     }
+
   }
   return arr;
+}
+
+void execute(char **args){
+  printf("execute func\n");
+  if (!strcmp(args[0], "cd")){
+    int val = chdir(args[1]);
+    printf("chdir value: %d\n", val);
+  }
+  else if(!strcmp(args[0], "exit")){
+
+  }
+  else{
+    int child = fork();
+    execvp(args[0], args);
+    exit(0);
+  }
 }
