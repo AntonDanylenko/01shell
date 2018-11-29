@@ -33,14 +33,14 @@ char ** parse_args(char *cmd){
   return arr;
 }
 
-void execute(char **args){
-  printf("execute func\n");
+int execute(char **args){
+  //printf("execute func\n");
   if (!strcmp(args[0], "cd")){
     int val = chdir(args[1]);
     printf("chdir value: %d\n", val);
   }
   else if(!strcmp(args[0], "exit")){
-
+    //return 0;
   }
   else{
     int child = fork();
