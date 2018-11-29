@@ -16,7 +16,12 @@ int main(int argc, char *argv[]) {
   while(commands[i]){
     //printf("commands[%d]: %s\n", i, commands[i]);
     char ** args = parse_args(commands[i]);
-    execute(args);
+    if(!strcmp(args[0], "exit")){
+      return 0;
+    }
+    else{
+      execute(args);
+    }
     /*int child = fork();
     //printf("child: %d\n", child);
     if(!child){

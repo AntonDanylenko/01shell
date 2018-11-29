@@ -37,10 +37,7 @@ void execute(char **args){
   //printf("execute func\n");
   if (!strcmp(args[0], "cd")){
     int val = chdir(args[1]);
-    printf("chdir value: %d\n", val);
-  }
-  else if(!strcmp(args[0], "exit")){
-    //return 0;
+    //printf("chdir value: %d\n", val);
   }
   else{
     int child = fork();
