@@ -4,5 +4,6 @@
 char ** parse_cmds(char *);
 char ** parse_args(char *);
 void execute(char **);
+void redirect(char **);
 
 #endif

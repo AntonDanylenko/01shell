@@ -51,3 +51,10 @@ void execute(char **args){
     }
   }
 }
+
+void redirect(char **cmd){
+  char **input = malloc(10*sizeof(char *));
+  char *sign = malloc(100);
+  char *file = malloc(100);
+  input = strsep(&cmd, ">")
+}

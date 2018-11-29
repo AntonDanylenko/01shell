@@ -24,36 +24,7 @@ int main(int argc, char *argv[]) {
       else{
         execute(args);
       }
-      /*int child = fork();
-      //printf("child: %d\n", child);
-      if(!child){
-        //printf("child process\n");
-        execute(args);
-        exit(0);
-      }
-      else{
-        //printf("parent process\n");
-        wait(NULL);
-      }*/
       i++;
     }
-    /*int i=0;
-    while(args){
-      int child = fork();
-      if(!child){
-        int status;
-        wait(&status);
-      }
-      else{
-        int ii=0;
-        while(args[i][ii]){
-          printf("Arg %d: %s\n", ii, args[i][ii]);
-          ii++;
-        }
-        printf("Null arg: %s\n", args[i][ii]);
-        execvp(args[i][0], args[i]);
-        i++;
-      }
-    }*/
   }
 }
