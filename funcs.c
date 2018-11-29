@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 #include "funcs.h"
 
 char ** parse_cmds(char * line){
@@ -33,28 +34,61 @@ char ** parse_args(char *cmd){
   return arr;
 }
 
-void execute(char **args){
-  //printf("execute func\n");
-  if (!strcmp(args[0], "cd")){
-    int val = chdir(args[1]);
-    //printf("chdir value: %d\n", val);
+void execute(char *command){
+  //printf("commands[%d]: %s\n", i, commands[i]);
+  char ** args = parse_args(command);
+  if(!strcmp(args[0], "exit")){
+    exit(0);
   }
   else{
-    int child = fork();
-    if(!child){
-      //printf("child process\n");
-      execvp(args[0], args);
+    //printf("execute func\n");
+    if (!strcmp(args[0], "cd")){
+      int val = chdir(args[1]);
+      //printf("chdir value: %d\n", val);
     }
     else{
-      //printf("parent process\n");
-      wait(NULL);
+      int child = fork();
+      if(!child){
+        //printf("child process\n");
+        if(redirect(command) == -1){
+          execvp(args[0], args);
+        }
+      }
+      else{
+        //printf("parent process\n");
+        wait(NULL);
+      }
     }
   }
 }
 
-void redirect(char **cmd){
-  char **input = malloc(10*sizeof(char *));
+int redirect(char *cmd){
+  char *input = malloc(10*sizeof(char *));
   char *sign = malloc(100);
   char *file = malloc(100);
-  input = strsep(&cmd, ">")
+  printf("In redirect\n");
+  if (strstr(cmd, ">")){
+    printf("Sign is >\n");
+    sign = ">";
+  }
+  else if (strstr(cmd, "<")){
+    sign = "<";
+  }
+  else {
+    return -1;
+  }
+  input = strsep(&cmd, sign);
+  printf("input: %s\n", input);
+  file = cmd;
+  printf("file: %s\n", file);
+  int filedesc = open(file, O_WRONLY | O_CREAT);
+  char **args = malloc(10 * sizeof(char *));
+  args = parse_args(input);
+  execvp(args[0], args);
+  char *output = malloc(100);
+  fgets(output,100,stdout);
+  printf("output: %s\n", output);
+  write(filedesc, output, 100);
+  close(filedesc);
+  return 0;
 }
