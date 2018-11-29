@@ -33,7 +33,7 @@ char ** parse_args(char *cmd){
   return arr;
 }
 
-int execute(char **args){
+void execute(char **args){
   //printf("execute func\n");
   if (!strcmp(args[0], "cd")){
     int val = chdir(args[1]);
