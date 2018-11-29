@@ -43,7 +43,13 @@ void execute(char **args){
   }
   else{
     int child = fork();
-    execvp(args[0], args);
-    exit(0);
+    if(!child){
+      //printf("child process\n");
+      execvp(args[0], args);
+    }
+    else{
+      //printf("parent process\n");
+      wait(NULL);
+    }
   }
 }
