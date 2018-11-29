@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
       //printf("commands[%d]: %s\n", i, commands[i]);
       char ** args = parse_args(commands[i]);
       if(!strcmp(args[0], "exit")){
+        exit(0);
         return 0;
       }
       else{
