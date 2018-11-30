@@ -68,6 +68,7 @@ int redirect(char *cmd){
   char *input = malloc(10*sizeof(char *));
   char *file = malloc(100);
   char **args = malloc(10 * sizeof(char *));
+  FILE *fp;
   //printf("In redirect\n");
   //printf("cmd: %s\n", cmd);
   //printf("strstr cmd: %s\n", strstr(cmd,">"));
@@ -79,7 +80,6 @@ int redirect(char *cmd){
     file = parse_args(cmd)[0];
     //printf("file: %s\n", file);
     args = parse_args(input);
-    FILE *fp;
     fp = freopen(file, "w", stdout);
     execvp(args[0], args);
     fclose(fp);
@@ -91,6 +91,9 @@ int redirect(char *cmd){
     file = parse_args(cmd)[0];
     //printf("file: %s\n", file);
     args = parse_args(input);
+    fp = freopen(fileno(stdin), "w", file);
+    execvp(args[0], args);
+    fclose(fp);
   }
   else {
     return -1;
