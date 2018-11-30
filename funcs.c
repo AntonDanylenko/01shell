@@ -67,11 +67,14 @@ int redirect(char *cmd){
   char *sign = malloc(100);
   char *file = malloc(100);
   printf("In redirect\n");
-  if (strstr(cmd, ">")){
+  printf("cmd: %s\n", cmd);
+  printf("strstr cmd: %s\n", strstr(cmd,">"));
+  if (strchr(cmd, '>')){
     printf("Sign is >\n");
     sign = ">";
   }
-  else if (strstr(cmd, "<")){
+  else if (strchr(cmd, '<')){
+    printf("Sign is <\n");
     sign = "<";
   }
   else {
