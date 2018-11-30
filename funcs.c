@@ -66,37 +66,44 @@ void execute(char *command){
 
 int redirect(char *cmd){
   char *input = malloc(10*sizeof(char *));
-  char *sign = malloc(100);
   char *file = malloc(100);
-  printf("In redirect\n");
-  printf("cmd: %s\n", cmd);
-  printf("strstr cmd: %s\n", strstr(cmd,">"));
-  printf("strchr cmd: %s\n", strchr(cmd,'>'));
+  char **args = malloc(10 * sizeof(char *));
+  //printf("In redirect\n");
+  //printf("cmd: %s\n", cmd);
+  //printf("strstr cmd: %s\n", strstr(cmd,">"));
+  //printf("strchr cmd: %s\n", strchr(cmd,'>'));
   if (strchr(cmd, '>')){
-    printf("Sign is >\n");
-    sign = ">";
+    //printf("Sign is >\n");
+    input = strsep(&cmd, ">");
+    //printf("input: %s\n", input);
+    file = parse_args(cmd)[0];
+    //printf("file: %s\n", file);
+    args = parse_args(input);
+    FILE *fp;
+    fp = freopen(file, "w", stdout);
+    execvp(args[0], args);
+    fclose(fp);
   }
   else if (strchr(cmd, '<')){
-    printf("Sign is <\n");
-    sign = "<";
+    //printf("Sign is <\n");
+    input = strsep(&cmd, "<");
+    //printf("input: %s\n", input);
+    file = parse_args(cmd)[0];
+    //printf("file: %s\n", file);
+    args = parse_args(input);
   }
   else {
     return -1;
   }
-  input = strsep(&cmd, sign);
-  printf("input: %s\n", input);
-  file = parse_args(cmd)[0];
-  printf("file: %s\n", file);
-  int filedesc = open(file, O_WRONLY | O_CREAT);
-  char **args = malloc(10 * sizeof(char *));
-  args = parse_args(input);
-  int save_out;
-  dup2(save_out, fileno(stdout));
-  execvp(args[0], args);
-  char *output = malloc(100);
+  /*int i=0;
+  while(args[i]){
+    printf("args[%d]: %s\n", i, args[i]);
+    i++;
+  }*/
+  /*char *output = malloc(100);
   fgets(output,100,stdout);
   printf("output: %s\n", output);
   write(filedesc, output, 100);
-  close(filedesc);
+  close(filedesc);*/
   return 0;
 }
