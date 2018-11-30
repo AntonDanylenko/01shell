@@ -90,6 +90,7 @@ int redirect(char *cmd){
   int filedesc = open(file, O_WRONLY | O_CREAT);
   char **args = malloc(10 * sizeof(char *));
   args = parse_args(input);
+  dup(filedesc);
   execvp(args[0], args);
   char *output = malloc(100);
   fgets(output,100,stdout);
