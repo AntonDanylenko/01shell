@@ -85,7 +85,7 @@ int redirect(char *cmd){
   }
   input = strsep(&cmd, sign);
   printf("input: %s\n", input);
-  file = cmd;
+  file = parse_args(cmd)[0];
   printf("file: %s\n", file);
   int filedesc = open(file, O_WRONLY | O_CREAT);
   char **args = malloc(10 * sizeof(char *));
