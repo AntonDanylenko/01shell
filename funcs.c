@@ -36,7 +36,9 @@ char ** parse_args(char *cmd){
 
 void execute(char *command){
   //printf("commands[%d]: %s\n", i, commands[i]);
-  char ** args = parse_args(command);
+  char * cmd_cpy = malloc(10*sizeof(char *));
+  strcpy(cmd_cpy, command);
+  char ** args = parse_args(cmd_cpy);
   if(!strcmp(args[0], "exit")){
     exit(0);
   }
@@ -69,6 +71,7 @@ int redirect(char *cmd){
   printf("In redirect\n");
   printf("cmd: %s\n", cmd);
   printf("strstr cmd: %s\n", strstr(cmd,">"));
+  printf("strchr cmd: %s\n", strchr(cmd,'>'));
   if (strchr(cmd, '>')){
     printf("Sign is >\n");
     sign = ">";
