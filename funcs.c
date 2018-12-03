@@ -91,7 +91,7 @@ int redirect(char *cmd){
     file = parse_args(cmd)[0];
     printf("file: %s\n", file);
     args = parse_args(input);
-    fp = freopen(fileno(stdin), "w", file);
+    fp = freopen(stdin, "w", file);
     execvp(args[0], args);
     fclose(fp);
   }
