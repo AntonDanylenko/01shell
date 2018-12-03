@@ -91,9 +91,16 @@ int redirect(char *cmd){
     file = parse_args(cmd)[0];
     printf("file: %s\n", file);
     args = parse_args(input);
-    fp = freopen(stdin, "w", file);
+    //fp = open(STDIN_FILENO, O_RDWR);
+    int argfile = open(file, O_RDONLY);
+    char *buf = malloc(100);
+    read(argfile, buf, 100);
+    write(STDIN_FILENO, buf, 100);
     execvp(args[0], args);
-    fclose(fp);
+    close(argfile);
+    /*char *buffer = malloc(100);
+    fread(buffer, sizeof(char), 100, stdin);
+    printf("stdin: %s\n", buffer);*/
   }
   else {
     return -1;
