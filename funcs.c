@@ -85,11 +85,11 @@ int redirect(char *cmd){
     fclose(fp);
   }
   else if (strchr(cmd, '<')){
-    //printf("Sign is <\n");
+    printf("Sign is <\n");
     input = strsep(&cmd, "<");
-    //printf("input: %s\n", input);
+    printf("input: %s\n", input);
     file = parse_args(cmd)[0];
-    //printf("file: %s\n", file);
+    printf("file: %s\n", file);
     args = parse_args(input);
     fp = freopen(fileno(stdin), "w", file);
     execvp(args[0], args);
