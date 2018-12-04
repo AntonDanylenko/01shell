@@ -128,9 +128,11 @@ int redirect(char *cmd){
     args = parse_args(input);
     //char ** args1 = malloc(10 * sizeof(char *));
     printf("cmd: %s\n", cmd);
-    fp = popen(cmd, "w");
-    execvp(args[0], args);
-    pclose(fp);
+    /*int p[2];
+    pipe(p);
+    p[0] = popen(input, "r");
+    p
+    pclose(fp);*/
   }
   else {
     return -1;
