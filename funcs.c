@@ -129,7 +129,7 @@ int redirect(char *cmd){
     //char ** args1 = malloc(10 * sizeof(char *));
     fp = popen(cmd, "w");
     execvp(args[0], args);
-    close(fp);
+    fclose(fp);
   }
   else {
     return -1;
