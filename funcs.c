@@ -130,7 +130,7 @@ int redirect(char *cmd){
     printf("cmd: %s\n", cmd);
     fp = popen(cmd, "w");
     execvp(args[0], args);
-    fclose(fp);
+    pclose(fp);
   }
   else {
     return -1;
