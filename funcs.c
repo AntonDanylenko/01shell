@@ -7,6 +7,11 @@
 #include "funcs.h"
 
 char ** parse_cmds(char * line){
+  /*
+  Takes in a line from the user.
+  Parses that line by semicolons and removes \n at the end.
+  Returns array of commands.
+  */
   char ** arr = malloc(10 * sizeof(char *));
   int i = 0;
   while(line){
@@ -20,6 +25,11 @@ char ** parse_cmds(char * line){
 }
 
 char ** parse_args(char *cmd){
+  /*
+  Takes in a single command (Ex: ls ..).
+  Parses that command by spaces into an array.
+  Returns that array.
+  */
   char ** arr = malloc(10 * sizeof(char *));
   int i = 0;
   while(cmd){
@@ -35,6 +45,10 @@ char ** parse_args(char *cmd){
 }
 
 void execute(char *command){
+  /*
+  Takes in a single command (Ex: ls ..).
+  Runs command as if it were run on the terminal.
+  */
   //printf("commands[%d]: %s\n", i, commands[i]);
   char * cmd_cpy = malloc(10*sizeof(char *));
   strcpy(cmd_cpy, command);
@@ -65,6 +79,11 @@ void execute(char *command){
 }
 
 int redirect(char *cmd){
+  /*
+  Takes in a single command (Ex: ls ..).
+  If the command includes > or < (Ex: ls .. > test.txt), executes command as a redirection.
+  Otherwise, returns -1 and lets command be executed normally in the execute func.
+  */
   char *input = malloc(10*sizeof(char *));
   char *file = malloc(100);
   char **args = malloc(10 * sizeof(char *));
@@ -101,6 +120,16 @@ int redirect(char *cmd){
     /*char *buffer = malloc(100);
     fread(buffer, sizeof(char), 100, stdin);
     printf("stdin: %s\n", buffer);*/
+  }
+  else if (strchr(cmd, '|')){
+    printf("Sign is |\n");
+    input = strsep(&cmd, "|");
+    printf("input: %s\n", input);
+    args = parse_args(input);
+    //char ** args1 = malloc(10 * sizeof(char *));
+    fp = popen(cmd, "w");
+    execvp(args[0], args);
+    close(fp);
   }
   else {
     return -1;
